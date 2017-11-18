@@ -3,11 +3,10 @@ package Model.Statements;
 import Model.Exceptions.DivisionByZeroException;
 import Model.Exceptions.NotExistingException;
 import Model.Exceptions.UnknownOperationException;
-import Model.ExecutionStackInterface;
+import Model.ExecutionStack.ExecutionStackInterface;
 import Model.Expressions.Expression;
 import Model.ProgramState;
-import Model.Statements.Statement;
-import Model.SymbolTableInterface;
+import Model.SymbolTable.SymbolTableInterface;
 
 public class IfStatement implements Statement {
     private Expression  ifStatement;

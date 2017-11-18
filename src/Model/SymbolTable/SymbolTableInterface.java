@@ -1,4 +1,4 @@
-package Model;
+package Model.SymbolTable;
 
 public interface SymbolTableInterface<K,V>
 {

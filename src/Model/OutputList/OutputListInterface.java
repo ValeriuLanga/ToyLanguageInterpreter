@@ -1,4 +1,4 @@
-package Model;
+package Model.OutputList;
 
 public interface OutputListInterface<T> {
     public void     addElement(T element);

@@ -1,4 +1,4 @@
-package Model;
+package Model.OutputList;
 
 import Model.Exceptions.NotExistingException;
 

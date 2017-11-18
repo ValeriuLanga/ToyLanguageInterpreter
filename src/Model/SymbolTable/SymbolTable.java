@@ -1,4 +1,4 @@
-package Model;
+package Model.SymbolTable;
 
 import java.util.HashMap;
 

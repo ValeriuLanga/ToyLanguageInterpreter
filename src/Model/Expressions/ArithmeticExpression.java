@@ -2,7 +2,8 @@ package Model.Expressions;
 
 import Model.Exceptions.DivisionByZeroException;
 import Model.Exceptions.UnknownOperationException;
-import Model.SymbolTableInterface;
+import Model.Heap.HeapInterface;
+import Model.SymbolTable.SymbolTableInterface;
 
 public class ArithmeticExpression implements Expression {
     private char operator;
@@ -15,11 +16,11 @@ public class ArithmeticExpression implements Expression {
     }
 
     @Override
-    public int eval(SymbolTableInterface<String, Integer> SymTable) throws DivisionByZeroException, UnknownOperationException {
+    public int eval(SymbolTableInterface<String, Integer> SymTable, HeapInterface<Integer, Integer> heap) throws DivisionByZeroException, UnknownOperationException {
         int left = 0, right = 0;
 
-        left = this.left.eval(SymTable);
-        right = this.right.eval(SymTable);
+        left = this.left.eval(SymTable, heap);
+        right = this.right.eval(SymTable, heap);
 
         switch (this.operator) {
             case '+': {

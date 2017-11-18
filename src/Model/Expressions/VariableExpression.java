@@ -1,7 +1,8 @@
 package Model.Expressions;
 
 import Model.Exceptions.NotExistingException;
-import Model.SymbolTableInterface;
+import Model.Heap.HeapInterface;
+import Model.SymbolTable.SymbolTableInterface;
 
 public class VariableExpression implements Expression {
     private String varName;
@@ -11,7 +12,8 @@ public class VariableExpression implements Expression {
     }
 
     @Override
-    public int eval(SymbolTableInterface<String, Integer> SymTable) throws NotExistingException {
+    public int eval(SymbolTableInterface<String, Integer> SymTable, HeapInterface<Integer, Integer> heap) throws NotExistingException {
+
         if (SymTable.contains(this.varName))
             return SymTable.get(this.varName);
         else {

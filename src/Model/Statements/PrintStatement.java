@@ -3,9 +3,9 @@ package Model.Statements;
 import Model.Exceptions.DivisionByZeroException;
 import Model.Exceptions.UnknownOperationException;
 import Model.Expressions.Expression;
-import Model.OutputListInterface;
+import Model.OutputList.OutputListInterface;
 import Model.ProgramState;
-import Model.SymbolTableInterface;
+import Model.SymbolTable.SymbolTableInterface;
 
 public class PrintStatement implements Statement {
     private Expression expression;

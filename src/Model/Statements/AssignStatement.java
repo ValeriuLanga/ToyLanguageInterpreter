@@ -2,10 +2,9 @@ package Model.Statements;
 
 import Model.Exceptions.DivisionByZeroException;
 import Model.Exceptions.UnknownOperationException;
-import Model.ExecutionStackInterface;
 import Model.Expressions.Expression;
 import Model.ProgramState;
-import Model.SymbolTableInterface;
+import Model.SymbolTable.SymbolTableInterface;
 
 public class AssignStatement implements Statement {
     private String varName;

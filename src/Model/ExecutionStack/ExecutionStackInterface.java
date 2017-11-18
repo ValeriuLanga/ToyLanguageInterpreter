@@ -1,4 +1,4 @@
-package Model;
+package Model.ExecutionStack;
 
 public interface ExecutionStackInterface<T> {
     public void push(T element);

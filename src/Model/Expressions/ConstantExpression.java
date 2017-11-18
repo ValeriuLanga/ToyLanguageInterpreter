@@ -1,6 +1,7 @@
 package Model.Expressions;
 
-import Model.SymbolTableInterface;
+import Model.Heap.HeapInterface;
+import Model.SymbolTable.SymbolTableInterface;
 
 public class ConstantExpression implements Expression {
     private int constant;
@@ -10,7 +11,7 @@ public class ConstantExpression implements Expression {
     }
 
     @Override
-    public int eval(SymbolTableInterface<String, Integer> SymTable) {
+    public int eval(SymbolTableInterface<String, Integer> SymTable, HeapInterface<Integer, Integer> heap) {
         return this.constant;
     }
 

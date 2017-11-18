@@ -5,14 +5,12 @@ import Model.Exceptions.FileException;
 import Model.Exceptions.UnknownOperationException;
 import Model.FileTable.FileDescriptor;
 import Model.FileTable.FileTableInterface;
-import Model.IdGenerator;
+import Utils.IdGenerator;
 import Model.ProgramState;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.Buffer;
 
 public class OpenReadFileStatement implements Statement {
     private String fileName;

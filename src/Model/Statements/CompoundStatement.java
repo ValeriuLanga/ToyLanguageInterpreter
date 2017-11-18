@@ -1,6 +1,6 @@
 package Model.Statements;
 
-import Model.ExecutionStackInterface;
+import Model.ExecutionStack.ExecutionStackInterface;
 import Model.ProgramState;
 
 public class CompoundStatement implements Statement {
