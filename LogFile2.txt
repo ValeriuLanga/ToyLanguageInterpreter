@@ -1,0 +1,147 @@
+
+ExecutionStack: 
+(((open (f,example.txt);read (f,c));Print(c));IF(c) THEN((read (f,c);Print(c)))ELSE(Print(0)))
+close (f)
+SymbolTable: 
+Output: 
+FileTable: 
+
+ExecutionStack: 
+((open (f,example.txt);read (f,c));Print(c))
+IF(c) THEN((read (f,c);Print(c)))ELSE(Print(0))
+close (f)
+SymbolTable: 
+Output: 
+FileTable: 
+
+ExecutionStack: 
+(open (f,example.txt);read (f,c))
+Print(c)
+IF(c) THEN((read (f,c);Print(c)))ELSE(Print(0))
+close (f)
+SymbolTable: 
+Output: 
+FileTable: 
+
+ExecutionStack: 
+open (f,example.txt)
+read (f,c)
+Print(c)
+IF(c) THEN((read (f,c);Print(c)))ELSE(Print(0))
+close (f)
+SymbolTable: 
+Output: 
+FileTable: 
+
+ExecutionStack: 
+read (f,c)
+Print(c)
+IF(c) THEN((read (f,c);Print(c)))ELSE(Print(0))
+close (f)
+SymbolTable: 
+	f->2
+Output: 
+FileTable: 2-->FileDescriptor{fileName='example.txt', bufferedReader=java.io.BufferedReader@135fbaa4}
+
+
+ExecutionStack: 
+Print(c)
+IF(c) THEN((read (f,c);Print(c)))ELSE(Print(0))
+close (f)
+SymbolTable: 
+	c->15
+	f->2
+Output: 
+FileTable: 2-->FileDescriptor{fileName='example.txt', bufferedReader=java.io.BufferedReader@135fbaa4}
+
+
+ExecutionStack: 
+IF(c) THEN((read (f,c);Print(c)))ELSE(Print(0))
+close (f)
+SymbolTable: 
+	c->15
+	f->2
+Output: 15
+FileTable: 2-->FileDescriptor{fileName='example.txt', bufferedReader=java.io.BufferedReader@135fbaa4}
+
+
+ExecutionStack: 
+(read (f,c);Print(c))
+close (f)
+SymbolTable: 
+	c->15
+	f->2
+Output: 15
+FileTable: 2-->FileDescriptor{fileName='example.txt', bufferedReader=java.io.BufferedReader@135fbaa4}
+
+
+ExecutionStack: 
+read (f,c)
+Print(c)
+close (f)
+SymbolTable: 
+	c->15
+	f->2
+Output: 15
+FileTable: 2-->FileDescriptor{fileName='example.txt', bufferedReader=java.io.BufferedReader@135fbaa4}
+
+
+ExecutionStack: 
+Print(c)
+close (f)
+SymbolTable: 
+	c->50
+	f->2
+Output: 15
+FileTable: 2-->FileDescriptor{fileName='example.txt', bufferedReader=java.io.BufferedReader@135fbaa4}
+
+
+ExecutionStack: 
+close (f)
+SymbolTable: 
+	c->50
+	f->2
+Output: 1550
+FileTable: 2-->FileDescriptor{fileName='example.txt', bufferedReader=java.io.BufferedReader@135fbaa4}
+
+
+ExecutionStack: 
+SymbolTable: 
+	c->50
+	f->2
+Output: 1550
+FileTable: 
+
+ExecutionStack: 
+(((open (f,exampl.txt);read (f,c));Print(c));IF(c) THEN((read (f,c);Print(c)))ELSE(Print(0)))
+close (f)
+SymbolTable: 
+Output: 
+FileTable: 
+
+ExecutionStack: 
+((open (f,exampl.txt);read (f,c));Print(c))
+IF(c) THEN((read (f,c);Print(c)))ELSE(Print(0))
+close (f)
+SymbolTable: 
+Output: 
+FileTable: 
+
+ExecutionStack: 
+(open (f,exampl.txt);read (f,c))
+Print(c)
+IF(c) THEN((read (f,c);Print(c)))ELSE(Print(0))
+close (f)
+SymbolTable: 
+Output: 
+FileTable: 
+
+ExecutionStack: 
+open (f,exampl.txt)
+read (f,c)
+Print(c)
+IF(c) THEN((read (f,c);Print(c)))ELSE(Print(0))
+close (f)
+SymbolTable: 
+Output: 
+FileTable: 
