@@ -7,6 +7,10 @@ import Model.Repository.RepositoryInterface;
 import Model.Statements.Statement;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Controller
 {
@@ -34,11 +38,25 @@ public class Controller
     public void executeAll() throws DivisionByZeroException, UnknownOperationException, IOException {
         ProgramState programState = repository.getCurrentProgramState();
 
-        while(!programState.getExecutionStack().isEmpty())
+        while(!programState.getExecutionStack().isEmpty()){
             executeOnce();
+            /*
+            programState.getHeap().setUnderlyingMap((HashMap<Integer, Integer>)
+                    collectGarbage(programState.getSymbolTable().getUnderlyingMap().values(),
+                        programState.getHeap().getUnderlyingMap()));
+            */
+        }
     }
+
+    /*
     public void setFile(String fileName){
         repository.setFileName(fileName);
+    }
+    */
+
+    public Map<Integer, Integer> collectGarbage(Collection<Integer> symbolTableValues, Map<Integer, Integer> heap){
+        return heap.entrySet().stream().filter(e->symbolTableValues.contains(e.getKey()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getKey));
     }
 
 

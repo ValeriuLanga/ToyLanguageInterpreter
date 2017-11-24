@@ -27,18 +27,15 @@ public class NewAddressStatement implements Statement {
 
         int value = expression.eval(symbolTable, heap);
 
-        // see if the address from the symbol table exists in the heap
-        int oldAddress = symbolTable.get(variableName);
-
-        // get a new address
+        // generate a new address
         int newAddress = FreeAddressGenerator.generateFreeAddress(heap);
 
-        if( heap.contains(oldAddress) ){
-            // update the address to the new eval() result
+        if(symbolTable.contains(variableName)){
+            // update the 'address' stored in the symbol table
             symbolTable.update(variableName, newAddress);
         }
         else{
-            // add the entry in the heap
+            // add a new entry in the heap
             symbolTable.add(variableName, newAddress);
         }
 

@@ -3,6 +3,7 @@ package Model;
 import Model.ExecutionStack.ExecutionStackInterface;
 import Model.FileTable.FileDescriptor;
 import Model.FileTable.FileTableInterface;
+import Model.Heap.Heap;
 import Model.Heap.HeapInterface;
 import Model.OutputList.OutputListInterface;
 import Model.Statements.Statement;
@@ -51,6 +52,7 @@ public class ProgramState {
         return "ExecutionStack: " + executionStack.toString() + "\nSymbolTable: " + symbolTable.toString()
                 + "\nOutput: " + outputList.toString()
                 +"\nFileTable: " + fileTable.toString()
+                +"\nHeap: " + heap.toString()
                 + '\n';
     }
 }

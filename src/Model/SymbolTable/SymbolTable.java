@@ -46,4 +46,9 @@ public class SymbolTable<K,V> implements SymbolTableInterface<K,V>
 
         return stringBuilder.toString();
     }
+
+    @Override
+    public HashMap<K, V> getUnderlyingMap() {
+        return container;
+    }
 }

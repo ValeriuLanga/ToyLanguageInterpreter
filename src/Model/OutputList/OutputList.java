@@ -61,14 +61,11 @@ public class OutputList<T> implements OutputListInterface<T> {
     public String toString(){
        StringBuilder stringBuilder = new StringBuilder();
 
-       for(T element : outputList)
+       for(T element : outputList) {
            stringBuilder.append(String.valueOf(element));
-
+           stringBuilder.append(" ");
+       }
        return stringBuilder.toString();
     }
 
-
-    //public LinkedList<T> clone() {
-    //    return (LinkedList<T>)outputList.clone();
-    //}
 }

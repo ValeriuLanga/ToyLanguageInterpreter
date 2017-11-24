@@ -5,6 +5,7 @@ import Model.Exceptions.NotExistingException;
 import Model.Exceptions.UnknownOperationException;
 import Model.ExecutionStack.ExecutionStackInterface;
 import Model.Expressions.Expression;
+import Model.Heap.HeapInterface;
 import Model.ProgramState;
 import Model.SymbolTable.SymbolTableInterface;
 
@@ -23,8 +24,9 @@ public class IfStatement implements Statement {
     public ProgramState execute(ProgramState currentState) throws DivisionByZeroException, UnknownOperationException, NotExistingException {
         SymbolTableInterface<String, Integer> symTable = currentState.getSymbolTable();
         ExecutionStackInterface<Statement> stack = currentState.getExecutionStack();
+        HeapInterface<Integer, Integer> heap = currentState.getHeap();
 
-        if(0 != ifStatement.eval(symTable)) {
+        if(0 != ifStatement.eval(symTable, heap)) {
             stack.push(thenStatement);
         }
         else {

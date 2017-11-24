@@ -14,7 +14,7 @@ public class ReadAddressExpression implements Expression {
 
     @Override
     public int eval(SymbolTableInterface<String, Integer> SymbolTable, HeapInterface<Integer, Integer> heap) throws DivisionByZeroException, UnknownOperationException {
-        // return the value of the adrress which 'variableName' has in the SymbolTable
+        // return the value of the address which 'variableName' has in the SymbolTable
         return heap.get(SymbolTable.get(variableName));
     }
 

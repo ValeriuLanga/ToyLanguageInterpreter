@@ -3,10 +3,13 @@ package main;
 import Model.*;
 import Model.ExecutionStack.ExecutionStack;
 import Model.ExecutionStack.ExecutionStackInterface;
+import Model.Expressions.ArithmeticExpression;
 import Model.Expressions.ConstantExpression;
+import Model.Expressions.ReadAddressExpression;
 import Model.Expressions.VariableExpression;
 import Model.FileTable.FileDescriptor;
 import Model.FileTable.FileTable;
+import Model.Heap.Heap;
 import Model.OutputList.OutputList;
 import Model.OutputList.OutputListInterface;
 import Model.Repository.Repository;
@@ -28,6 +31,10 @@ public class Interpreter {
 
         menu.addCommand(new ExitCommand("0", "Exit!"));
 
+        //
+        // 1st statement below
+        //
+
         Statement statement1 = new CompoundStatement(
                 new AssignStatement("a", new ConstantExpression(10)),
                 new PrintStatement(new VariableExpression("a")));
@@ -38,16 +45,19 @@ public class Interpreter {
         SymbolTableInterface<String, Integer> symbolTable1  = new SymbolTable<>();
         OutputListInterface<Integer> outputList1            = new OutputList<>();
         FileTable<Integer, FileDescriptor> fileTable1       = new FileTable<>();
-        ProgramState programState1                          = new ProgramState(executionStack1, symbolTable1, outputList1, fileTable1);
+        Heap<Integer, Integer>  heap1                       = new Heap<>();
+        ProgramState programState1                          = new ProgramState(executionStack1, symbolTable1, outputList1, fileTable1, heap1);
 
         RepositoryInterface repository1                     = new Repository("LogFile1.txt");
         repository1.addProgramState(programState1);
         Controller controller1 = new Controller(repository1);
-        // comment here
+
         menu.addCommand(new RunExample("1", programState1.toString(), controller1));
 
-
+        //
         // 2nd statement below
+        //
+
         Statement statement2 = new CompoundStatement(
                         new CompoundStatement(
                                 new CompoundStatement(
@@ -68,13 +78,54 @@ public class Interpreter {
         SymbolTableInterface<String, Integer> symbolTable2  = new SymbolTable<>();
         OutputListInterface<Integer> outputList2            = new OutputList<>();
         FileTable<Integer, FileDescriptor> fileTable2       = new FileTable<>();
-        ProgramState programState2                          = new ProgramState(executionStack2, symbolTable2, outputList2, fileTable2);
+        Heap<Integer, Integer>  heap2                       = new Heap<>();
+        ProgramState programState2                          = new ProgramState(executionStack2, symbolTable2, outputList2, fileTable2, heap2);
 
         RepositoryInterface repository2                     = new Repository("LogFile2.txt");
         repository2.addProgramState(programState2);
         Controller controller2 = new Controller(repository2);
 
         menu.addCommand(new RunExample("2", statement2.toString(), controller2));
+
+        //
+        // 3rd statement below
+        //
+
+        Statement statement3 = new CompoundStatement(
+                        new CompoundStatement(
+                                new CompoundStatement(
+                                        new CompoundStatement(
+                                                new AssignStatement("v", new ConstantExpression(10)),
+                                                new NewAddressStatement("v", new ConstantExpression(20))),
+                                        new NewAddressStatement("a", new ConstantExpression(20))),
+                                new PrintStatement(new ArithmeticExpression('+',
+                                        new ConstantExpression(100),
+                                        new ReadAddressExpression("v")))),
+                        new PrintStatement(new ArithmeticExpression('+',
+                                new ConstantExpression(100),
+                                new ReadAddressExpression("a"))));
+
+
+        /*
+        Statement statement3 =  new CompoundStatement(
+                new NewAddressStatement("v", new ConstantExpression(20)),
+                new PrintStatement( new VariableExpression("v")));
+        */
+
+        ExecutionStackInterface<Statement> executionStack3  = new ExecutionStack<>();
+        executionStack3.push(statement3);
+
+        SymbolTableInterface<String, Integer> symbolTable3  = new SymbolTable<>();
+        OutputListInterface<Integer> outputList3            = new OutputList<>();
+        FileTable<Integer, FileDescriptor> fileTable3       = new FileTable<>();
+        Heap<Integer, Integer>  heap3                       = new Heap<>();
+        ProgramState programState3                          = new ProgramState(executionStack3, symbolTable3, outputList3, fileTable3, heap3);
+
+        RepositoryInterface repository3                     = new Repository("LogFile3.txt");
+        repository3.addProgramState(programState3);
+        Controller controller3 = new Controller(repository3);
+
+        menu.addCommand(new RunExample("3", statement3.toString(), controller3));
 
         menu.show();
     }

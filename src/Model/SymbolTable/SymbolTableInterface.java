@@ -1,5 +1,7 @@
 package Model.SymbolTable;
 
+import java.util.HashMap;
+
 public interface SymbolTableInterface<K,V>
 {
     public V get(K key);
@@ -8,4 +10,5 @@ public interface SymbolTableInterface<K,V>
     public void update(K key, V value);
     public void put(K key, V Value);
     public void replace(K key, V value);
+    public HashMap<K,V> getUnderlyingMap();
 }

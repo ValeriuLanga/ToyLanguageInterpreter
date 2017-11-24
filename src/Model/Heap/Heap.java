@@ -3,6 +3,7 @@ package Model.Heap;
 import Model.Exceptions.HeapException;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Heap<K,V> implements HeapInterface<K,V>{
     private HashMap<K,V> heapContainer;
@@ -35,5 +36,27 @@ public class Heap<K,V> implements HeapInterface<K,V>{
     @Override
     public boolean contains(K key) {
         return heapContainer.containsKey(key);
+    }
+
+    @Override
+    public Map<K, V> getUnderlyingMap() {
+        return heapContainer;
+    }
+
+    @Override
+    public void setUnderlyingMap(HashMap<K, V> map) {
+        heapContainer = map;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(K key : heapContainer.keySet()){
+            stringBuilder.append("\n\t");
+            stringBuilder.append(key + "->" + get(key).toString());
+        }
+
+        return stringBuilder.toString();
     }
 }
