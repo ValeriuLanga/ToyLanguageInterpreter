@@ -1,12 +1,11 @@
 package main;
 
 import Model.*;
+import Model.Exceptions.DivisionByZeroException;
+import Model.Exceptions.UnknownOperationException;
 import Model.ExecutionStack.ExecutionStack;
 import Model.ExecutionStack.ExecutionStackInterface;
-import Model.Expressions.ArithmeticExpression;
-import Model.Expressions.ConstantExpression;
-import Model.Expressions.ReadAddressExpression;
-import Model.Expressions.VariableExpression;
+import Model.Expressions.*;
 import Model.FileTable.FileDescriptor;
 import Model.FileTable.FileTable;
 import Model.Heap.Heap;
@@ -22,6 +21,7 @@ import View.RunExample;
 import View.TextMenu;
 import Controller.Controller;
 
+import java.io.IOException;
 
 
 public class Interpreter {
@@ -120,6 +120,28 @@ public class Interpreter {
         Controller controller3                              = new Controller(repository3);
 
         menu.addCommand(new RunExample("3", statement3.toString(), controller3));
+
+        //
+        // 4th Statement below
+        //
+
+        Statement statement4 = new PrintStatement(new BooleanExpression(">", new ConstantExpression(2), new ConstantExpression(1)));
+
+        ExecutionStackInterface<Statement> executionStack4  = new ExecutionStack<>();
+        executionStack4.push(statement4);
+
+        SymbolTableInterface<String, Integer> symbolTable4  = new SymbolTable<>();
+        OutputListInterface<Integer> outputList4            = new OutputList<>();
+        FileTable<Integer, FileDescriptor> fileTable4       = new FileTable<>();
+        Heap<Integer, Integer>  heap4                       = new Heap<>();
+        ProgramState programState4                          = new ProgramState(executionStack4, symbolTable4, outputList4, fileTable4, heap4);
+
+        RepositoryInterface repository4                     = new Repository("LogFile4.txt");
+        repository4.addProgramState(programState4);
+
+        Controller controller4                              = new Controller(repository4);
+
+        menu.addCommand(new RunExample("4", statement4.toString(), controller4));
 
         menu.show();
     }

@@ -39,7 +39,7 @@ public class ArithmeticExpression implements Expression {
                 return left / right;
             }
             default: {
-                throw new UnknownOperationException(this.operator);
+                throw new UnknownOperationException(operator);
             }
         }
     }
