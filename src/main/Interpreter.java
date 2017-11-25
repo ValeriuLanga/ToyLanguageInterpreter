@@ -105,13 +105,6 @@ public class Interpreter {
                                 new ConstantExpression(100),
                                 new ReadAddressExpression("a"))));
 
-
-        /*
-        Statement statement3 =  new CompoundStatement(
-                new NewAddressStatement("v", new ConstantExpression(20)),
-                new PrintStatement( new VariableExpression("v")));
-        */
-
         ExecutionStackInterface<Statement> executionStack3  = new ExecutionStack<>();
         executionStack3.push(statement3);
 
@@ -123,7 +116,8 @@ public class Interpreter {
 
         RepositoryInterface repository3                     = new Repository("LogFile3.txt");
         repository3.addProgramState(programState3);
-        Controller controller3 = new Controller(repository3);
+
+        Controller controller3                              = new Controller(repository3);
 
         menu.addCommand(new RunExample("3", statement3.toString(), controller3));
 

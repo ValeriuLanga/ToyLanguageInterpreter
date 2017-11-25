@@ -40,23 +40,18 @@ public class Controller
 
         while(!programState.getExecutionStack().isEmpty()){
             executeOnce();
-            /*
+
+
             programState.getHeap().setUnderlyingMap((HashMap<Integer, Integer>)
                     collectGarbage(programState.getSymbolTable().getUnderlyingMap().values(),
                         programState.getHeap().getUnderlyingMap()));
-            */
+
         }
     }
 
-    /*
-    public void setFile(String fileName){
-        repository.setFileName(fileName);
-    }
-    */
-
     public Map<Integer, Integer> collectGarbage(Collection<Integer> symbolTableValues, Map<Integer, Integer> heap){
         return heap.entrySet().stream().filter(e->symbolTableValues.contains(e.getKey()))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getKey));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
 
