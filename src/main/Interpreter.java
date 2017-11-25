@@ -143,6 +143,37 @@ public class Interpreter {
 
         menu.addCommand(new RunExample("4", statement4.toString(), controller4));
 
+        //
+        // 5th Statement below
+        //
+
+        Statement statement5 = new CompoundStatement(
+                new CompoundStatement(
+                        new AssignStatement("v", new ConstantExpression(6)),
+                        new WhileStatement(new BooleanExpression("!=", new VariableExpression("v"), new ConstantExpression(4)),
+                                new CompoundStatement(
+                                        new PrintStatement(new VariableExpression("v")),
+                                        new AssignStatement("v", new ArithmeticExpression('-',
+                                                new VariableExpression("v"),
+                                                new ConstantExpression(1)))))),
+                new PrintStatement(new VariableExpression("v")));
+
+        ExecutionStackInterface<Statement> executionStack5  = new ExecutionStack<>();
+        executionStack5.push(statement5);
+
+        SymbolTableInterface<String, Integer> symbolTable5  = new SymbolTable<>();
+        OutputListInterface<Integer> outputList5            = new OutputList<>();
+        FileTable<Integer, FileDescriptor> fileTable5       = new FileTable<>();
+        Heap<Integer, Integer>  heap5                       = new Heap<>();
+        ProgramState programState5                          = new ProgramState(executionStack5, symbolTable5, outputList5, fileTable5, heap5);
+
+        RepositoryInterface repository5                     = new Repository("LogFile5.txt");
+        repository5.addProgramState(programState5);
+
+        Controller controller5                              = new Controller(repository5);
+
+        menu.addCommand(new RunExample("5", statement5.toString(), controller5));
+
         menu.show();
     }
 }
