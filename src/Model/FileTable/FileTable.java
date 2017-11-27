@@ -3,6 +3,7 @@ package Model.FileTable;
 import Model.Exceptions.NotExistingException;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class FileTable<K,V> implements FileTableInterface<K,V>{
     private HashMap<K,V> fileDescriptorTable;
@@ -30,6 +31,11 @@ public class FileTable<K,V> implements FileTableInterface<K,V>{
             throw new NotExistingException("File "+ key + " does not exist!");
 
         return fileDescriptorTable.get(key);
+    }
+
+    @Override
+    public Map<K,V> getUnderlayingContainer(){
+        return fileDescriptorTable;
     }
 
     @Override

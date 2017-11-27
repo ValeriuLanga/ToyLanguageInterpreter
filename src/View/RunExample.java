@@ -4,10 +4,7 @@ import Controller.Controller;
 import Model.Exceptions.DivisionByZeroException;
 import Model.Exceptions.FileException;
 import Model.Exceptions.UnknownOperationException;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class RunExample extends Command{
     private Controller controller;
@@ -21,13 +18,20 @@ public class RunExample extends Command{
     @Override
     public void execute()
     {
+        controller.executeAll();
+        /*
         try{
             controller.executeAll();
         }
         catch(DivisionByZeroException | UnknownOperationException | IOException | FileException exception) {
             System.out.println(exception.getMessage());
-            System.exit(0);
+
+            // close any open files, so no handles are left open after the
+            // program terminates in case of an exception
+
+           // System.exit(0);
         }
+        */
     }
 
     @Override

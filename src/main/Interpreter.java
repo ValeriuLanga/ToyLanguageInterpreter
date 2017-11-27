@@ -62,7 +62,7 @@ public class Interpreter {
                         new CompoundStatement(
                                 new CompoundStatement(
                                         new CompoundStatement(
-                                                new OpenReadFileStatement("exampl.txt", "f"),
+                                                new OpenReadFileStatement("example.txt", "f"),
                                                 new ReadFileStatement("f", "c")),
                                         new PrintStatement(new VariableExpression("c"))),
                                 new IfStatement(new VariableExpression("c"),
