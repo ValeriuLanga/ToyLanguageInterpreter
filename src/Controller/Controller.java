@@ -3,6 +3,7 @@ package Controller;
 import Model.*;
 import Model.Exceptions.DivisionByZeroException;
 import Model.Exceptions.FileException;
+import Model.Exceptions.HeapException;
 import Model.Exceptions.UnknownOperationException;
 import Model.FileTable.FileTableInterface;
 import Model.Repository.RepositoryInterface;
@@ -25,7 +26,7 @@ public class Controller
         this.repository = repository;
     }
 
-    public void executeOnce() throws DivisionByZeroException, UnknownOperationException, IOException {
+    public void executeOnce() throws DivisionByZeroException, UnknownOperationException, IOException, HeapException {
         ProgramState programState = repository.getCurrentProgramState();
 
         if(!programState.getExecutionStack().isEmpty())
@@ -53,7 +54,7 @@ public class Controller
                         collectGarbage(programState.getSymbolTable().getUnderlyingMap().values(),
                                 programState.getHeap().getUnderlyingMap()));
             }
-            catch(DivisionByZeroException | UnknownOperationException | IOException | FileException exception) {
+            catch(DivisionByZeroException | UnknownOperationException | IOException | FileException | HeapException exception) {
                 System.out.println(exception.getMessage());
 
                 // close any open files, so no handles are left open after the

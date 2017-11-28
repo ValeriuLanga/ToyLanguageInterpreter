@@ -91,13 +91,33 @@ public class Interpreter {
         // 3rd statement below
         //
 
+        /*
         Statement statement3 = new CompoundStatement(
+                new CompoundStatement(
+                        new CompoundStatement(
+                                new CompoundStatement(
+                                        new AssignStatement("v", new ConstantExpression(10)),
+                                        new NewAddressStatement("v", new ConstantExpression(20))),
+                                new NewAddressStatement("a", new ConstantExpression(20))),
+                        new PrintStatement(new ArithmeticExpression('+',
+                                new ConstantExpression(100),
+                                new ReadAddressExpression("v")))),
+                new PrintStatement(new ArithmeticExpression('+',
+                        new ConstantExpression(100),
+                        new ReadAddressExpression("a"))));
+        */
+
+        Statement statement3 = new CompoundStatement(
+                new CompoundStatement(
                         new CompoundStatement(
                                 new CompoundStatement(
                                         new CompoundStatement(
                                                 new AssignStatement("v", new ConstantExpression(10)),
                                                 new NewAddressStatement("v", new ConstantExpression(20))),
                                         new NewAddressStatement("a", new ConstantExpression(20))),
+
+                                new AssignStatement("a",new ConstantExpression(10))),
+
                                 new PrintStatement(new ArithmeticExpression('+',
                                         new ConstantExpression(100),
                                         new ReadAddressExpression("v")))),
