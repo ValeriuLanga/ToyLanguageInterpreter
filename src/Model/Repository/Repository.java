@@ -8,31 +8,44 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Repository implements RepositoryInterface {
-    private ArrayList<ProgramState> arrayList;
+    private List<ProgramState> programList;
     private String LogFilePath;
 
 
     public Repository(String FilePath)    {
-        arrayList = new ArrayList<ProgramState>();
+        programList = new ArrayList<ProgramState>();
         LogFilePath = FilePath;
     }
 
     public void addProgramState(ProgramState programState)    {
-        arrayList.add(programState);
+        programList.add(programState);
     }
 
+    /*
     @Override
     public ProgramState getCurrentProgramState() {
          return arrayList.get(0);
     }
+    */
 
     @Override
-    public void LogProgramState() throws IOException{
+    public List<ProgramState> getProgramsList() {
+        return programList;
+    }
+
+    @Override
+    public void setProgramsList(List<ProgramState> programsList) {
+        programList = programsList;
+    }
+
+    @Override
+    public void LogProgramState(ProgramState programState) throws IOException{
         PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(LogFilePath, true)));
         printWriter.print("\n");
-        printWriter.print(getCurrentProgramState());
+        printWriter.print(programState);
         printWriter.close();
     }
 

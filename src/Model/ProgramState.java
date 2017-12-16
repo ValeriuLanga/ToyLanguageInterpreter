@@ -1,13 +1,16 @@
 package Model;
 
+import Model.Exceptions.DivisionByZeroException;
+import Model.Exceptions.ExecutionStackException;
+import Model.Exceptions.UnknownOperationException;
 import Model.ExecutionStack.ExecutionStackInterface;
 import Model.FileTable.FileDescriptor;
 import Model.FileTable.FileTableInterface;
-import Model.Heap.Heap;
 import Model.Heap.HeapInterface;
 import Model.OutputList.OutputListInterface;
 import Model.Statements.Statement;
 import Model.SymbolTable.SymbolTableInterface;
+import Utils.IdGenerator;
 
 public class ProgramState {
     private ExecutionStackInterface<Statement> executionStack;
@@ -15,6 +18,7 @@ public class ProgramState {
     private OutputListInterface<Integer> outputList;
     private FileTableInterface<Integer, FileDescriptor> fileTable;
     private HeapInterface<Integer, Integer> heap;
+    private int programId;
 
     public ProgramState(ExecutionStackInterface<Statement> stack,
                         SymbolTableInterface<String, Integer> symbolTable,
@@ -27,6 +31,7 @@ public class ProgramState {
         this.outputList = outputList;
         this.fileTable = fileTable;
         this.heap = heap;
+        this.programId = IdGenerator.generateId();
     }
 
     public ExecutionStackInterface<Statement> getExecutionStack() {
@@ -47,9 +52,24 @@ public class ProgramState {
         return heap;
     }
 
+    public boolean isNotCompleted(){
+        return executionStack.isEmpty();
+    }
+
+    public ProgramState executeOnce() throws DivisionByZeroException, UnknownOperationException, ExecutionStackException {
+        if(executionStack.isEmpty()){
+            throw new ExecutionStackException("[ExecutionStack] is empty!");
+        }
+
+        Statement statement = executionStack.pop();
+
+        return statement.execute(this);
+    }
+
     @Override
     public String toString(){
-        return "ExecutionStack: " + executionStack.toString() + "\nSymbolTable: " + symbolTable.toString()
+        return  "Id: " + programId +
+                "ExecutionStack: " + executionStack.toString() + "\nSymbolTable: " + symbolTable.toString()
                 + "\nOutput: " + outputList.toString()
                 +"\nFileTable: " + fileTable.toString()
                 +"\nHeap: " + heap.toString()

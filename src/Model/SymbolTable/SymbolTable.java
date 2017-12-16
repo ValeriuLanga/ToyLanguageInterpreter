@@ -51,4 +51,16 @@ public class SymbolTable<K,V> implements SymbolTableInterface<K,V>
     public HashMap<K, V> getUnderlyingMap() {
         return container;
     }
+
+    @Override
+    public SymbolTableInterface<K,V> clone(){
+        SymbolTableInterface<K,V> symbolTableInterfaceClone = new SymbolTable<>();
+
+        for( K key : container.keySet()){
+            V value = container.get(key);
+            symbolTableInterfaceClone.put(key, value);
+        }
+
+        return  symbolTableInterfaceClone;
+    }
 }
