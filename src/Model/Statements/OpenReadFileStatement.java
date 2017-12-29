@@ -43,11 +43,11 @@ public class OpenReadFileStatement implements Statement {
             throw new FileException(exception.getMessage());
         }
 
-        return currentState;
+        return null;
     }
 
     @Override
     public String toString(){
-        return "open (" + fileId + "," + fileName + ")";
+        return "open ( fileId: " + fileId + " fileName: " + fileName + ")";
     }
 }

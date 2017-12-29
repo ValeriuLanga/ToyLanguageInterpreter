@@ -46,11 +46,11 @@ public class ReadFileStatement implements Statement {
             throw new FileException(e.getMessage());
         }
 
-        return currentState;
+        return null;
     }
 
     @Override
     public String toString(){
-        return "read (" + fileId + "," + variableName + ")";
+        return "read (" + fileId + "," + variableName + ");";
     }
 }

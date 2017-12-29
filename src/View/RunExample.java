@@ -16,9 +16,9 @@ public class RunExample extends Command{
     }
 
     @Override
-    public void execute()
-    {
+    public void execute() throws InterruptedException, UnknownOperationException, DivisionByZeroException, IOException {
         controller.executeAll();
+
         /*
         try{
             controller.executeAll();

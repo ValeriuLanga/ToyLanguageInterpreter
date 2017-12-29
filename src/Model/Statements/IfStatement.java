@@ -33,7 +33,7 @@ public class IfStatement implements Statement {
             stack.push(elseStatement);
         }
 
-        return currentState;
+        return null;
     }
 
     public String toString() {

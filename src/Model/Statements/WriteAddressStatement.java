@@ -35,6 +35,11 @@ public class WriteAddressStatement implements Statement {
         // update the address to the new value
         heap.add(address, value);
 
-        return currentState;
+        return null;
+    }
+
+    @Override
+    public String toString(){
+        return " WriteHeap( address of: " + variableName + " value: " +  expression.toString() + ";";
     }
 }

@@ -24,14 +24,15 @@ public class ProgramState {
                         SymbolTableInterface<String, Integer> symbolTable,
                         OutputListInterface<Integer> outputList,
                         FileTableInterface<Integer, FileDescriptor> fileTable,
-                        HeapInterface<Integer, Integer> heap){
+                        HeapInterface<Integer, Integer> heap,
+                        int programId){
 
         this.executionStack = stack;
         this.symbolTable = symbolTable;
         this.outputList = outputList;
         this.fileTable = fileTable;
         this.heap = heap;
-        this.programId = IdGenerator.generateId();
+        this.programId = programId;
     }
 
     public ExecutionStackInterface<Statement> getExecutionStack() {
@@ -52,8 +53,10 @@ public class ProgramState {
         return heap;
     }
 
-    public boolean isNotCompleted(){
-        return executionStack.isEmpty();
+    public boolean isCompleted(){
+        if(executionStack.isEmpty())
+            return true;
+        return false;
     }
 
     public ProgramState executeOnce() throws DivisionByZeroException, UnknownOperationException, ExecutionStackException {
@@ -68,7 +71,7 @@ public class ProgramState {
 
     @Override
     public String toString(){
-        return  "Id: " + programId +
+        return  "Id: " + programId + "\n" +
                 "ExecutionStack: " + executionStack.toString() + "\nSymbolTable: " + symbolTable.toString()
                 + "\nOutput: " + outputList.toString()
                 +"\nFileTable: " + fileTable.toString()

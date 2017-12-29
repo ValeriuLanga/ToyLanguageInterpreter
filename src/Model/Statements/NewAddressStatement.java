@@ -42,11 +42,11 @@ public class NewAddressStatement implements Statement {
         // in any case, we update the value 'pointed' to in the heap
         heap.add(newAddress, value);
 
-        return currentState;
+        return null;
     }
 
     @Override
     public String toString() {
-        return "new (" + variableName + " , " + expression + ")";
+        return "new ( address: " + variableName + " value: " + expression.toString() + ")";
     }
 }

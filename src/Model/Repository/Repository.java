@@ -42,7 +42,7 @@ public class Repository implements RepositoryInterface {
     }
 
     @Override
-    public void LogProgramState(ProgramState programState) throws IOException{
+    public void logProgramState(ProgramState programState) throws IOException{
         PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(LogFilePath, true)));
         printWriter.print("\n");
         printWriter.print(programState);

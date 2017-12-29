@@ -10,7 +10,7 @@ public interface RepositoryInterface {
 
     //public ProgramState getCurrentProgramState();
 
-    public void LogProgramState(ProgramState programState)throws IOException;
+    public void logProgramState(ProgramState programState)throws IOException;
     public void setFileName( String fileName );
 
     public List<ProgramState> getProgramsList();

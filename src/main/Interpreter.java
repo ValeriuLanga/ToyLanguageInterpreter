@@ -16,6 +16,7 @@ import Model.Repository.RepositoryInterface;
 import Model.Statements.*;
 import Model.SymbolTable.SymbolTable;
 import Model.SymbolTable.SymbolTableInterface;
+import Utils.IdGenerator;
 import View.ExitCommand;
 import View.RunExample;
 import View.TextMenu;
@@ -46,7 +47,7 @@ public class Interpreter {
         OutputListInterface<Integer> outputList1            = new OutputList<>();
         FileTable<Integer, FileDescriptor> fileTable1       = new FileTable<>();
         Heap<Integer, Integer>  heap1                       = new Heap<>();
-        ProgramState programState1                          = new ProgramState(executionStack1, symbolTable1, outputList1, fileTable1, heap1);
+        ProgramState programState1                          = new ProgramState(executionStack1, symbolTable1, outputList1, fileTable1, heap1, IdGenerator.generateId());
 
         RepositoryInterface repository1                     = new Repository("LogFile1.txt");
         repository1.addProgramState(programState1);
@@ -79,7 +80,7 @@ public class Interpreter {
         OutputListInterface<Integer> outputList2            = new OutputList<>();
         FileTable<Integer, FileDescriptor> fileTable2       = new FileTable<>();
         Heap<Integer, Integer>  heap2                       = new Heap<>();
-        ProgramState programState2                          = new ProgramState(executionStack2, symbolTable2, outputList2, fileTable2, heap2);
+        ProgramState programState2                          = new ProgramState(executionStack2, symbolTable2, outputList2, fileTable2, heap2, IdGenerator.generateId());
 
         RepositoryInterface repository2                     = new Repository("LogFile2.txt");
         repository2.addProgramState(programState2);
@@ -132,7 +133,7 @@ public class Interpreter {
         OutputListInterface<Integer> outputList3            = new OutputList<>();
         FileTable<Integer, FileDescriptor> fileTable3       = new FileTable<>();
         Heap<Integer, Integer>  heap3                       = new Heap<>();
-        ProgramState programState3                          = new ProgramState(executionStack3, symbolTable3, outputList3, fileTable3, heap3);
+        ProgramState programState3                          = new ProgramState(executionStack3, symbolTable3, outputList3, fileTable3, heap3, IdGenerator.generateId());
 
         RepositoryInterface repository3                     = new Repository("LogFile3.txt");
         repository3.addProgramState(programState3);
@@ -144,7 +145,6 @@ public class Interpreter {
         //
         // 4th Statement below
         //
-
         Statement statement4 = new PrintStatement(new BooleanExpression(">", new ConstantExpression(2), new ConstantExpression(1)));
 
         ExecutionStackInterface<Statement> executionStack4  = new ExecutionStack<>();
@@ -154,7 +154,7 @@ public class Interpreter {
         OutputListInterface<Integer> outputList4            = new OutputList<>();
         FileTable<Integer, FileDescriptor> fileTable4       = new FileTable<>();
         Heap<Integer, Integer>  heap4                       = new Heap<>();
-        ProgramState programState4                          = new ProgramState(executionStack4, symbolTable4, outputList4, fileTable4, heap4);
+        ProgramState programState4                          = new ProgramState(executionStack4, symbolTable4, outputList4, fileTable4, heap4, IdGenerator.generateId());
 
         RepositoryInterface repository4                     = new Repository("LogFile4.txt");
         repository4.addProgramState(programState4);
@@ -166,7 +166,6 @@ public class Interpreter {
         //
         // 5th Statement below
         //
-
         Statement statement5 = new CompoundStatement(
                 new CompoundStatement(
                         new AssignStatement("v", new ConstantExpression(6)),
@@ -185,7 +184,7 @@ public class Interpreter {
         OutputListInterface<Integer> outputList5            = new OutputList<>();
         FileTable<Integer, FileDescriptor> fileTable5       = new FileTable<>();
         Heap<Integer, Integer>  heap5                       = new Heap<>();
-        ProgramState programState5                          = new ProgramState(executionStack5, symbolTable5, outputList5, fileTable5, heap5);
+        ProgramState programState5                          = new ProgramState(executionStack5, symbolTable5, outputList5, fileTable5, heap5, IdGenerator.generateId());
 
         RepositoryInterface repository5                     = new Repository("LogFile5.txt");
         repository5.addProgramState(programState5);
@@ -193,6 +192,39 @@ public class Interpreter {
         Controller controller5                              = new Controller(repository5);
 
         menu.addCommand(new RunExample("5", statement5.toString(), controller5));
+
+
+        //
+        //  6th statement below
+        //
+
+        Statement statement6 = new CompoundStatement(
+                new CompoundStatement(
+                        new AssignStatement("v", new ConstantExpression(10)),
+                        new WriteAddressStatement("a",new ConstantExpression(22))),
+                new ForkStatement(
+                        new CompoundStatement(
+                                new CompoundStatement(
+                                        new WriteAddressStatement("a",new ConstantExpression(30)),
+                                        new AssignStatement("a", new ConstantExpression(32))),
+                                new CompoundStatement(
+                                        new PrintStatement(new VariableExpression("v")),
+                                        new PrintStatement(new ReadAddressExpression("v"))))));
+
+        //Statement statement6 = new ForkStatement(statement5);
+
+        ExecutionStack<Statement> executionStack6 = new ExecutionStack<>();
+        executionStack6.push(statement6);
+
+        ProgramState programState6 = new ProgramState(executionStack6, new SymbolTable<String, Integer>(),
+                new OutputList<Integer>(), new FileTable<Integer, FileDescriptor>(), new Heap<Integer, Integer>(), IdGenerator.generateId());
+
+        RepositoryInterface repository6 = new Repository("LogFile6.txt");
+        repository6.addProgramState(programState6);
+
+        Controller controller6 = new Controller(repository6);
+
+        menu.addCommand(new RunExample("6", statement6.toString(), controller6));
 
         menu.show();
     }

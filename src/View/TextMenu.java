@@ -1,7 +1,14 @@
 package View;
 
+import Model.Exceptions.DivisionByZeroException;
+import Model.Exceptions.FileException;
+import Model.Exceptions.GenericException;
+import Model.Exceptions.UnknownOperationException;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.concurrent.Executors;
 
 public class TextMenu {
     private HashMap<String, Command> commands;
@@ -26,7 +33,7 @@ public class TextMenu {
         }
     }
 
-    public void show()
+    public void show()// throws InterruptedException, DivisionByZeroException, UnknownOperationException, IOException {
     {
         @SuppressWarnings("resource")
         Scanner in = new Scanner(System.in);
@@ -43,7 +50,12 @@ public class TextMenu {
             }
             else
             {
-                command.execute();
+                try{
+                    command.execute();
+                }
+                catch(DivisionByZeroException | UnknownOperationException | IOException | FileException | InterruptedException exception){
+                    throw(new GenericException(exception.getMessage()));
+                }
             }
         }
     }

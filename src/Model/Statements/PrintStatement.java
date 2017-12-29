@@ -23,11 +23,12 @@ public class PrintStatement implements Statement {
 
         int res = this.expression.eval(symbolTable, heap);
         list.addElement(res);
-        return currentState;
+
+        return null;
     }
 
     @Override
     public String toString() {
-        return "Print(" + expression.toString() + ")";
+        return "Print(" + expression.toString() + ");";
     }
 }

@@ -1,5 +1,10 @@
 package View;
 
+import Model.Exceptions.DivisionByZeroException;
+import Model.Exceptions.UnknownOperationException;
+
+import java.io.IOException;
+
 public abstract class Command {
     private String option;
     private String description;
@@ -10,7 +15,7 @@ public abstract class Command {
         this.description = description;
     }
 
-    public abstract void execute();
+    public abstract void execute() throws InterruptedException, UnknownOperationException, DivisionByZeroException, IOException;
 
     public String getOption()
     {

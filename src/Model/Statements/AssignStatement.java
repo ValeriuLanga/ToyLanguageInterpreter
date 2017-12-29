@@ -30,7 +30,7 @@ public class AssignStatement implements Statement {
             symbolTable.put(varName, result);
         }
 
-        return currentState;
+        return null;
     }
 
     @Override

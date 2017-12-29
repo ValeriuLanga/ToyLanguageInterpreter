@@ -5,7 +5,9 @@ import Model.Exceptions.UnknownOperationException;
 import Model.ExecutionStack.ExecutionStack;
 import Model.ExecutionStack.ExecutionStackInterface;
 import Model.ProgramState;
+import Model.SymbolTable.SymbolTable;
 import Model.SymbolTable.SymbolTableInterface;
+import Utils.IdGenerator;
 
 public class ForkStatement implements Statement {
     private Statement statement;
@@ -18,13 +20,22 @@ public class ForkStatement implements Statement {
     public ProgramState execute(ProgramState currentState) throws DivisionByZeroException, UnknownOperationException {
 
         // create a new program state which we return
+        ExecutionStackInterface<Statement> newExecutionStack = new ExecutionStack<Statement>();
+        newExecutionStack.push(statement);
+
         ProgramState forkedProgramState = new ProgramState(
-                            new ExecutionStack<>(),
+                            newExecutionStack,
                             currentState.getSymbolTable().clone(),
                             currentState.getOutputList(),
                             currentState.getFileTable(),
-                            currentState.getHeap());
+                            currentState.getHeap(),
+                   IdGenerator.generateId() * 10);
 
         return forkedProgramState;
+    }
+
+    @Override
+    public String toString(){
+        return "fork( " + statement.toString() + " )";
     }
 }

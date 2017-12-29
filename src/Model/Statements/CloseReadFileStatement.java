@@ -33,11 +33,11 @@ public class CloseReadFileStatement implements Statement {
             throw new FileException(exception.getMessage());
         }
 
-        return currentState;
+        return null;
     }
 
     @Override
     public String toString(){
-        return "close (" + fileId + ")";
+        return "close ( fileId: " + fileId + ")";
     }
 }
