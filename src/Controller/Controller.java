@@ -55,11 +55,6 @@ public class Controller{
 
         // run concurrently one step for each program
         // prepare the list of callables
-        /*
-        List<Callable<ProgramState>> callablesList = programStates.stream()
-                .map((ProgramState programState) -> (Callable<ProgramState>)(()->{return programState.executeOnce();}))
-                .collect(Collectors.toList());
-        */
         List<Callable<ProgramState>> callablesList = programStates.stream()
                 .map((ProgramState programState) -> (Callable<ProgramState>)(()->{return programState.executeOnce();}))
                 .collect(Collectors.toList());
@@ -72,6 +67,9 @@ public class Controller{
                         return future.get();
                     }
                     catch(Exception e){
+                        //
+                        //  Read and Write Heap cause an exception to be thrown here!!!!
+                        //
                         //throw new ExecutionStackException(e.getMessage());
                         System.out.println(e);
                     }

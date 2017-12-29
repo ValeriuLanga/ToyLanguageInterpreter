@@ -201,15 +201,15 @@ public class Interpreter {
         Statement statement6 = new CompoundStatement(
                 new CompoundStatement(
                         new AssignStatement("v", new ConstantExpression(10)),
-                        new WriteAddressStatement("a",new ConstantExpression(22))),
+                        new NewAddressStatement("a",new ConstantExpression(22))),
                 new ForkStatement(
                         new CompoundStatement(
                                 new CompoundStatement(
-                                        new WriteAddressStatement("a",new ConstantExpression(30)),
-                                        new AssignStatement("a", new ConstantExpression(32))),
+                                        new WriteAddressStatement("a", new ConstantExpression(30)),
+                                        new AssignStatement("v", new ConstantExpression(32))),
                                 new CompoundStatement(
                                         new PrintStatement(new VariableExpression("v")),
-                                        new PrintStatement(new ReadAddressExpression("v"))))));
+                                        new PrintStatement(new ReadAddressExpression("a"))))));
 
         //Statement statement6 = new ForkStatement(statement5);
 
