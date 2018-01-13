@@ -226,6 +226,40 @@ public class Interpreter {
 
         menu.addCommand(new RunExample("6", statement6.toString(), controller6));
 
+        // statement 7, ForStatement
+        Statement statement7 = new CompoundStatement(
+          new AssignStatement("v", new ConstantExpression(20)),
+          new CompoundStatement(
+                  new ForStatement(
+                          new AssignStatement("v", new ConstantExpression(20)),
+                          new BooleanExpression("<", new VariableExpression("v"), new ConstantExpression(3)),
+                          new AssignStatement("v", new ArithmeticExpression(
+                                  '+',
+                                  new ConstantExpression(1),
+                                  new VariableExpression("v"))),
+                          new ForkStatement(new CompoundStatement(new PrintStatement(new VariableExpression("v")),
+                                  new AssignStatement("v", new ArithmeticExpression(
+                                          '+',
+                                          new ConstantExpression(1),
+                                          new VariableExpression("v")))
+                                  ))),
+                  new PrintStatement(new VariableExpression("v")))
+          );
+
+        ExecutionStack<Statement> executionStack7 = new ExecutionStack<>();
+        executionStack7.push(statement7);
+
+        ProgramState programState7 = new ProgramState(executionStack7, new SymbolTable<String, Integer>(),
+                new OutputList<Integer>(), new FileTable<Integer, FileDescriptor>(), new Heap<Integer, Integer>(), IdGenerator.generateId());
+
+        RepositoryInterface repository7 = new Repository("LogFile7.txt");
+        repository7.addProgramState(programState7);
+
+        Controller controller7 = new Controller(repository7);
+
+        menu.addCommand(new RunExample("7", statement7.toString(), controller7));
+
+
         menu.show();
     }
 }
